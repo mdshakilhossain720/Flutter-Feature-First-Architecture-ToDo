@@ -29,6 +29,27 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
+     // ✅ ADD THIS
+    flavorDimensions += "env"
+
+    productFlavors {
+        create("dev") {
+            dimension = "env"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+        }
+
+        create("uat") {
+            dimension = "env"
+            applicationIdSuffix = ".uat"
+            versionNameSuffix = "-uat"
+        }
+
+        create("prod") {
+            dimension = "env"
+            // no suffix for production
+        }
+    }
 
     buildTypes {
         release {
