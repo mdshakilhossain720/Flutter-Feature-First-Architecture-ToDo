@@ -12,17 +12,17 @@ abstract class FlavorConfig {
 
     switch (env) {
       case Environment.development:
-        baseUrl = "https://dev.api.example.com";
+        baseUrl = "https://demo.readyecommerce.app";
         environmentName = "Development";
         break;
 
       case Environment.uat:
-        baseUrl = "https://uat.api.example.com";
+        baseUrl = "https://demo.readyecommerce.app";
         environmentName = "UAT";
         break;
 
       case Environment.production:
-        baseUrl = "https://api.example.com";
+        baseUrl = "https://demo.readyecommerce.app";
         environmentName = "Production";
         break;
     }
