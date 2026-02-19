@@ -1,27 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'widgets/post_widgets.dart';
+import '../provider/post_provider.dart';
 
-class PostsScreen extends StatelessWidget {
-  const PostsScreen({super.key});
+
+
+
+class PostScreen extends ConsumerWidget {
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Posts"), centerTitle: true),
-      body: ListView.builder(
-        itemCount: 100,
-        itemBuilder: (context, index) {
-          //final post = posts[index];
+  Widget build(BuildContext context, WidgetRef ref) {
 
-          return PostCard(
-            userId: index + 1,
-            id: index + 1,
-            title: "Post Title $index",
-            body: "This is the body of post number $index.",
+    final postAsync = ref.watch(postProvider);
+
+
+    return Scaffold(
+
+      appBar: AppBar(title: Text("Posts")),
+
+      body: postAsync.when(
+
+        loading: () => CircularProgressIndicator(),
+
+        error: (e, s) => Text("Error: $e"),
+
+        data: (posts){
+
+          return ListView.builder(
+
+            itemCount: posts.length,
+
+            itemBuilder: (context, index){
+
+              final post = posts[index];
+
+              return ListTile(
+
+                title: Text(post.title),
+
+                subtitle: Text(post.body),
+
+              );
+
+            },
+
           );
+
         },
+
       ),
+
     );
+
   }
+
 }
